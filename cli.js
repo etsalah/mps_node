@@ -1,52 +1,50 @@
-import {parseArgs } from 'node:util';
+import { parseArgs } from 'node:util'
 
-import scrapMembersPages from './lib/scrap_members.js';
-import scrapLeaders from './lib/scrap_leaders.js';
-import getBrowserAndPageObject from './lib/main.js';
+import scrapMembersPages from './lib/scrap_members.js'
+import scrapLeaders from './lib/scrap_leaders.js'
+import getBrowserAndPageObject from './lib/main.js'
 
-const args = ['-o', 'mps'];
 const options = {
   op: {
     type: 'string',
-    short: 'o',
-  },
+    short: 'o'
+  }
+}
+
+async function main (commandLineArgs) {
+  const { op } = commandLineArgs
+  const opFunctions = {
+    help: printHelp,
+    mps: scrapMembersPages,
+    leaders: scrapLeaders
+  }
+  const func = opFunctions[op]
+
+  if (op === 'help' || (func === null || func === undefined)) {
+    printHelp(op, opFunctions)
+    return
+  }
+
+  const { browser, page } = await getBrowserAndPageObject()
+
+  const result = await func(page)
+  console.log(result)
+  await browser.close()
 };
 
-async function main(commandLineArgs) {
-	const {op} = commandLineArgs,
-		opFunctions = {
-			'help': printHelp, 'mps': scrapMembersPages,
-			'leaders': scrapLeaders
-		},
-		func = opFunctions[op];
+function printHelp (cmd, allowedCommands) {
+  const cmdLst = []
+  let allowedCmdStr = ''
 
-
-	if (op === 'help' || (func === null || func === undefined)) {
-		printHelp(op, opFunctions);
-		return;
-	}
-
-	const {browser, page} = await getBrowserAndPageObject();
-
-	const result = await func(page);
-	console.log(result)
-	await browser.close();
+  for (const cmd in allowedCommands) {
+    cmdLst.push(cmd)
+  }
+  allowedCmdStr = cmdLst.reduce((elem1, elem2) => `${elem1}, ${elem2}`)
+  console.log(
+    `${cmd} is not part of the supported operation. [${allowedCmdStr}] ` +
+    'are the supported operations')
 };
 
-
-function printHelp(cmd, allowedCommands) {
-	let cmdLst = [],
-		allowedCmdStr = "";
-
-	for(let cmd in allowedCommands) {
-		cmdLst.push(cmd);
-	}
-	allowedCmdStr = cmdLst.reduce((elem1, elem2) => `${elem1}, ${elem2}`);
-	console.log(
-		`${cmd} is not part of the supported operation. [${allowedCmdStr}] ` +
-		`are the supported operations`);
-};
-
-const cmdArgs = process.argv;
-const {values} = parseArgs({ cmdArgs, options });
-await main(values);
+const cmdArgs = process.argv
+const { values } = parseArgs({ cmdArgs, options })
+await main(values)

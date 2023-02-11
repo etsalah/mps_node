@@ -1,17 +1,19 @@
 class Leader {
-  constructor(leader_id, name, title, photo) {
-    this.leader_id = leader_id;
-    this.name = name;
-    this.title = title;
-    this.photo = photo;
+  constructor (leaderId, name, title, photo) {
+    this.leaderId = leaderId
+    this.name = name
+    this.title = title
+    this.photo = photo
   }
 
   toJson () {
     return {
-      'leader_id': this.leader_id, 'name': this.name, 'title': this.title,
-      'photo': this.photo
-    };
+      leaderId: this.leaderId,
+      name: this.name,
+      title: this.title,
+      photo: this.photo
+    }
   }
 }
 
-export default Leader;
+export default Leader
