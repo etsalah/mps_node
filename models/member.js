@@ -1,25 +1,46 @@
-class Member {
-  constructor (memberId, name, party, constituency, region, photo, profile) {
-    this.memberId = memberId
-    this.name = name
-    this.party = party
-    this.constituency = constituency
-    this.region = region
-    this.photo = photo
-    this.profile = profile
-  }
+import { DataTypes } from 'sequelize'
+import { getSequelizeObj } from '../lib/main.js'
 
-  toJson () {
-    return {
-      memberId: this.memberId,
-      name: this.name,
-      party: this.party,
-      constituency: this.constituency,
-      region: this.region,
-      photo: this.photo,
-      profile: this.profile
+
+const sequelizeObj = getSequelizeObj();
+
+const Member = sequelizeObj.define('member', {
+    memberId: {
+      field: 'member_id',
+      type: DataTypes.STRING,
+      allowNull: false
+    },
+    name: {
+      type: DataTypes.STRING,
+      allowNull: false
+    },
+    party: {
+      type: DataTypes.STRING,
+      allowNull: false
+    },
+    constituency: {
+      type: DataTypes.STRING,
+      allowNull: false
+    },
+    region: {
+      type: DataTypes.STRING,
+      allowNull: false
+    },
+    photo: {
+      type: DataTypes.STRING,
+      allowNull: false
+    },
+    profile: {
+      type: DataTypes.STRING,
+      allowNull: false
     }
+  }, {
+    timestamps: true,
+    createdAt: 'created_at',
+    updatedAt: 'updated_at',
+    tableName: 'member'
   }
-}
+)
+
 
 export default Member

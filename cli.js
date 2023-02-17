@@ -1,8 +1,11 @@
 import { parseArgs } from 'node:util'
+import * as dotenv from 'dotenv'
 
 import scrapMembersPages from './lib/scrap_members.js'
 import scrapLeaders from './lib/scrap_leaders.js'
-import getBrowserAndPageObject from './lib/main.js'
+import { getBrowserAndPageObject } from './lib/main.js'
+
+dotenv.config()
 
 const options = {
   op: {

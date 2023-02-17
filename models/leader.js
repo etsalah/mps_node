@@ -1,19 +1,35 @@
-class Leader {
-  constructor (leaderId, name, title, photo) {
-    this.leaderId = leaderId
-    this.name = name
-    this.title = title
-    this.photo = photo
-  }
+import { DataTypes } from 'sequelize'
+import { getSequelizeObj } from '../lib/main.js'
 
-  toJson () {
-    return {
-      leaderId: this.leaderId,
-      name: this.name,
-      title: this.title,
-      photo: this.photo
-    }
-  }
-}
+const sequelizeObj = getSequelizeObj();
+
+const Leader = sequelizeObj.define('leader', {
+  leaderId: {
+    field: 'leader_id',
+    type: DataTypes.STRING,
+    allowNull: false
+  },
+  name: {
+    field: 'name',
+    type: DataTypes.STRING,
+    allowNull: false
+  },
+  title: {
+    field: 'title',
+    type: DataTypes.STRING,
+    allowNull: false
+  },
+  photo: {
+    field: 'photo',
+    type: DataTypes.STRING,
+    allowNull: false
+  },
+}, {
+  timestamps: true,
+  createdAt: 'created_at',
+  updatedAt: 'updated_at',
+  tableName: 'leader'
+})
+
 
 export default Leader
