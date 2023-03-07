@@ -35,6 +35,11 @@ const Member = sequelizeObj.define('member', {
       allowNull: false
     }
   }, {
+    uniqueKeys: {
+      uniqueMembers: {
+        fields: ['name', 'party', 'constituency', 'region', ],
+      },
+    },
     timestamps: true,
     createdAt: 'created_at',
     updatedAt: 'updated_at',
@@ -42,5 +47,9 @@ const Member = sequelizeObj.define('member', {
   }
 )
 
+try {
+  await sequelizeObj.sync({alter: true})
+} catch (e) {
 
+}
 export default Member

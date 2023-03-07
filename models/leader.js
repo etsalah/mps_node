@@ -25,11 +25,23 @@ const Leader = sequelizeObj.define('leader', {
     allowNull: false
   },
 }, {
+  uniqueKeys : {
+    uniqueLeader: {
+      fields: [
+        'name', 'title',
+      ],
+    },
+  },
   timestamps: true,
   createdAt: 'created_at',
   updatedAt: 'updated_at',
   tableName: 'leader'
 })
 
+try {
+  await sequelizeObj.sync({alter: true})
+} catch (e) {
+
+}
 
 export default Leader
