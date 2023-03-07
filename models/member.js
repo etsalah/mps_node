@@ -11,19 +11,23 @@ const Member = sequelizeObj.define('member', {
   },
   name: {
     type: DataTypes.STRING,
-    allowNull: false
+    allowNull: false,
+    unique: 'uniqueMembers',
   },
   party: {
     type: DataTypes.STRING,
-    allowNull: false
+    allowNull: false,
+    unique: 'uniqueMembers',
   },
   constituency: {
     type: DataTypes.STRING,
-    allowNull: false
+    allowNull: false,
+    unique: 'uniqueMembers',
   },
   region: {
     type: DataTypes.STRING,
-    allowNull: false
+    allowNull: false,
+    unique: 'uniqueMembers',
   },
   photo: {
     type: DataTypes.STRING,
