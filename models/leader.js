@@ -1,7 +1,7 @@
 import { DataTypes } from 'sequelize'
 import { getSequelizeObj } from '../lib/main.js'
 
-const sequelizeObj = getSequelizeObj();
+const sequelizeObj = getSequelizeObj()
 
 const Leader = sequelizeObj.define('leader', {
   leaderId: {
@@ -23,14 +23,14 @@ const Leader = sequelizeObj.define('leader', {
     field: 'photo',
     type: DataTypes.STRING,
     allowNull: false
-  },
+  }
 }, {
-  uniqueKeys : {
+  uniqueKeys: {
     uniqueLeader: {
       fields: [
-        'name', 'title',
-      ],
-    },
+        'name', 'title'
+      ]
+    }
   },
   timestamps: true,
   createdAt: 'created_at',
@@ -39,7 +39,7 @@ const Leader = sequelizeObj.define('leader', {
 })
 
 try {
-  await sequelizeObj.sync({alter: true})
+  await sequelizeObj.sync({ alter: true })
 } catch (e) {
 
 }
