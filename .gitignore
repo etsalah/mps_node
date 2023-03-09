@@ -2,3 +2,5 @@
 .env
 node_modules
 package-lock.json
+sqlite3.lite
+sqlite.db
