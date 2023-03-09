@@ -12,22 +12,22 @@ const Member = sequelizeObj.define('member', {
   name: {
     type: DataTypes.STRING,
     allowNull: false,
-    unique: 'uniqueMembers',
+    unique: 'uniqueMembers'
   },
   party: {
     type: DataTypes.STRING,
     allowNull: false,
-    unique: 'uniqueMembers',
+    unique: 'uniqueMembers'
   },
   constituency: {
     type: DataTypes.STRING,
     allowNull: false,
-    unique: 'uniqueMembers',
+    unique: 'uniqueMembers'
   },
   region: {
     type: DataTypes.STRING,
     allowNull: false,
-    unique: 'uniqueMembers',
+    unique: 'uniqueMembers'
   },
   photo: {
     type: DataTypes.STRING,

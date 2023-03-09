@@ -8,25 +8,25 @@ const Leader = sequelizeObj.define('leader', {
     field: 'leader_id',
     type: DataTypes.STRING,
     allowNull: false,
-    unique: 'uniqueLeader',
+    unique: 'uniqueLeader'
   },
   name: {
     field: 'name',
     type: DataTypes.STRING,
     allowNull: false,
-    unique: 'uniqueLeader',
+    unique: 'uniqueLeader'
   },
   title: {
     field: 'title',
     type: DataTypes.STRING,
     allowNull: false,
-    unique: 'uniqueLeader',
+    unique: 'uniqueLeader'
   },
   photo: {
     field: 'photo',
     type: DataTypes.STRING,
     allowNull: false,
-    unique: 'uniqueLeader',
+    unique: 'uniqueLeader'
   }
 }, {
   uniqueKeys: {
