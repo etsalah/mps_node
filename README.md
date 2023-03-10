@@ -1,2 +1,2 @@
 # mps_node
-A clown of https://github.com/yeboahnanaosei/ghanamps in node
+A clone of https://github.com/yeboahnanaosei/ghanamps in node
