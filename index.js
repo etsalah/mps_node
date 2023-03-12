@@ -1,9 +1,9 @@
 import express from 'express'
 import * as dotenv from 'dotenv'
 
-import { getBrowserAndPageObject } from './lib/main.js'
-import scrapLeaders from './lib/scrap_leaders.js'
-import scrapMembersPages from './lib/scrap_members.js'
+import { Op } from 'sequelize'
+import Leader from './models/leader.js'
+import Member from './models/member.js'
 
 dotenv.config()
 
@@ -16,20 +16,40 @@ app.get('/', (req, res) => {
 
 app.get('/leaders', async (req, res) => {
   try {
-    const { browserObj, pageObj } = await getBrowserAndPageObject()
-    console.log(browserObj, pageObj)
-    res.send(scrapLeaders(pageObj))
-    browserObj.close()
+    res.send(await Leader.findAll())
   } catch (e) {
     res.send(e)
   }
 })
 
-app.get('/mps', async (req, res) => {
+app.get('/members', async (req, res) => {
+  const party = req.query.party
+  const region = req.query.region
+  let queryParams = []
+
+  if (party !== null && party !== undefined) {
+    queryParams.push({ party })
+  }
+  if (region !== null && region !== undefined) {
+    queryParams.push({ region })
+  }
+
+  const paramsProvided = (queryParams !== null && queryParams !== undefined)
+  if (paramsProvided && queryParams.length === 1) {
+    queryParams = {
+      where: queryParams[0]
+    }
+  } else if (paramsProvided && queryParams.length > 1) {
+    queryParams = {
+      where: {
+        [Op.and]: queryParams
+      }
+    }
+  } else {
+    queryParams = {}
+  }
   try {
-    const { browserObj, pageObj } = await getBrowserAndPageObject()
-    res.send(scrapMembersPages(pageObj))
-    browserObj.close()
+    res.send(await Member.findAll(queryParams))
   } catch (e) {
     res.send(e)
   }
